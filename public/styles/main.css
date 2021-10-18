@@ -10,3 +10,27 @@ body {
 .page-container {
     margin-top: 75px;
 }
+
+#fab{
+    position: fixed;
+    background: #800000;
+    color: white;
+    bottom: 30px;
+    right: 20px;
+    z-index: 999;
+}
+
+#search-bar{
+    padding: 0 20px;
+    margin-left: 0; /*lmao why does this left justify it*/
+    margin-top: 50px;
+    width: 500px;
+}
+
+#search_button{
+    padding:0 10px;
+    margin-top: 60px;
+    background-color: #800000;
+    color: white;
+    font-weight: bold;
+}
