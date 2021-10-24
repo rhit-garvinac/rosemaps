@@ -17,15 +17,26 @@ body {
     color: white;
     bottom: 30px;
     right: 20px;
-    z-index: 999;
+    z-index: 1;
+    filter: drop-shadow(2px 2px 4px black);
 }
 
 #search-bar{
-    padding: 0 20px;
-    margin-left: 0; /*lmao why does this left justify it*/
-    margin-top: 50px;
+    position: fixed;
+    top: 75px;
+    left: 20px;
     width: 500px;
+    background-color: #800000;
+    z-index: 1;
+    filter: drop-shadow(2px 2px 4px black);
 }
+
+@media only screen and (max-width: 576px) {
+    #search-bar {
+      left: 0px;
+      width: 100vw;
+    }
+  }
 
 #search_button{
     padding:0 10px;
@@ -33,4 +44,34 @@ body {
     background-color: #800000;
     color: white;
     font-weight: bold;
+}
+
+.bmd-layout-content {
+    height: 100vh;
+}
+
+.bmd-layout-drawer>header{
+    background-color: #800000;
+}
+
+.bmd-layout-drawer>header>a{
+    color: white;
+}
+
+#menuMyAnnotations,
+#menuPublicAnnotations,
+#menuSignOut {
+    font-size: 9pt;
+}
+
+#dw-s2{
+    background-color: #DDDDDD;
+    z-index: 1000; /*overkill*/
+}
+
+#map-img{
+    position: absolute;
+    width: 3000px;
+    height: auto;
+    touch-action: none;
 }

@@ -19,21 +19,7 @@ rhit.functionName = function () {
 
 rhit.ClassName = class {
 	constructor() {
-		document.querySelector("#submitHistory").addEventListener("click",(event) => {
-			console.log("clicked History")
-		});
-
-		document.querySelector("#submitAnnotation").addEventListener("click",(event) => {
-			console.log("clicked Annotation")
-		});
-
-		$('#Annotation').on('show.bs.modal', (event) => {
-			console.log("Annotation Modal Appearing")
-
-		});
-
-		$('#History').on('show.bs.modal', (event) => {
-			console.log("History Modal Appearing")		});
+		
 	}
 	methodName() {
 
@@ -44,7 +30,6 @@ rhit.ClassName = class {
 /** function and class syntax examples */
 rhit.main = function () {
 	console.log("Ready");
-	new rhit.ClassName();
-};
+}
 
 rhit.main();

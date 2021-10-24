@@ -10,67 +10,63 @@
   <title>RoseMaps</title>
 </head>
 <body>
-  <nav class="navbar navbar-dark fixed-top">
-    <i class="material-icons" style="font-size:30px;">history</i>
-    <a class="navbar-brand" href="#">RoseMaps</a>
-    <i class="material-icons" style="font-size:30px;">more_vert</i>
-  </nav>
-    <div class="container"  id="search-bar">
-      <div class="row">
-      <div class="col-10">
-        <form>
-          <div class="form-group col-12">
-            <input type="text" class="search-box col-12" id="formGroupExampleInput" placeholder="Starting Point">
-            <input type="text" class="search-box col-12" id="formGroupExampleInput2" placeholder="Destination">
-          </div>
-        </form>
-      </div>
-      <div class="col-2">
-        <button type="button" class="btn btn-primary" id="search_button">
-          <i class="material-icons">search</i>
-        </button>
-      </div>
-      </div>
-    </div>
 
-  <div id="mainPage" class="container page-container">
-    <img src="C:\Users\garvinac\Downloads\Olin Hall 2nd Floor.pdf" alt="Olin" width=1920 height=1080>
+  <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+    <header class="bmd-layout-header">
+            <nav class="navbar navbar-dark fixed-top bg-faded">
+            <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2" aria-expanded="false">
+                <span class="sr-only">Toggle drawer</span>
+                <i class="material-icons">more_vert</i>
+             </button>
+              <ul class="nav navbar-nav">
+                <li class="navbar-brand" href="#" >&nbsp;&nbsp;&nbsp;RoseMaps</li>
+              </ul>
+            </nav>
+      </header>
+    <div id="dw-s2" class="bmd-layout-drawer bg-faded">
+      <header>
+        <a class="navbar-brand" href="#" >RoseMaps</a>
+      </header>
+      <ul class="list-group">
+        <a id="menuMyAnnotations" class="list-group-item"><i class="material-icons">person</i>My Annotations</a>
+        <a id="menuPublicAnnotations" class="list-group-item"><i class="material-icons">public</i>Public Annotations</a>
+        <a id="menuSignOut" class="list-group-item"><i class="material-icons">logout</i>Sign Out</a>
+      </ul>
+    </div>
+  <main class="bmd-layout-content">
+    <nav class="navbar navbar-dark fixed-top">
+      <i class="material-icons" style="font-size:30px;">more_vert</i>
+      <a class="navbar-brand" href="#">RoseMaps</a>
+    </nav>
+    <div id="map-viewport">
+      <img id="map-img" src="images/Olin2.png" alt="map">
+    </div>
+  </main>
   </div>
-  <!-- Button -->
+
+
+  
+
+  <!-- Floaters -->
   <button id="fab" type="button" class="btn bmd-btn-fab" data-toggle="modal" data-target="#photoModal">
     <i class="material-icons" style="font-size:40px;">elevator</i>
   </button>
 
-  <div class="modal fade" id="Annotation" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Annotation</h5>
+  <div class="container"  id="search-bar">
+    <div class="row">
+    <div class="col-10">
+      <form>
+        <div class="form-group col-12">
+          <input type="text" class="search-box col-12" id="formGroupExampleInput" placeholder="Starting Point">
+          <input type="text" class="search-box col-12" id="formGroupExampleInput2" placeholder="Destination">
         </div>
-        <div class="modal-body">
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-          <button type="button" id="submitAnnotation" class="btn btn-primary" data-dismiss="modal">CREATE</button>
-        </div>
-      </div>
+      </form>
     </div>
-  </div>
-
-  <div class="modal fade" id="History" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">History</h5>
-        </div>
-        <div class="modal-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-          <button type="button" id="submitHistory" class="btn btn-primary" data-dismiss="modal">CREATE</button>
-        </div>
-      </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-primary" id="search_button">
+        <i class="material-icons">search</i>
+      </button>
+    </div>
     </div>
   </div>
 
