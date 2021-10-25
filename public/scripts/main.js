@@ -51,6 +51,10 @@ rhit.MapPageController = class {
 	  	this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_ANNOTATIONS);
 	  	this._unsubscribe = null;
 
+		document.querySelector("#menuPublicAnnotations").addEventListener("click",(event) => {
+			window.location.href = "/annotations.html";
+		});
+
 		document.querySelector("#fab").addEventListener("click",(event) => {
 			var map = document.getElementById("map-img")
 			var currSrc = map.src;
@@ -85,8 +89,10 @@ rhit.MapPageController = class {
 			querySnapshot.forEach((doc) => {
 				var annotation = new rhit.Annotation(
 					doc.id,
+					doc.get(rhit.FB_KEY_AUTHOR),
 					doc.get(rhit.FB_KEY_ROOM),
-					doc.get(rhit.FB_KEY_DESC)
+					doc.get(rhit.FB_KEY_DESC),
+
 				);
 				annotations.push(annotation);
 			});

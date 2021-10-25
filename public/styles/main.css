@@ -83,3 +83,21 @@ body {
     width: 3000px;
     height: auto;
 }
+
+.card{
+    margin: 10px 0;
+}
+
+.card-info{
+    margin: 20px 30px;
+}
+
+.card-buttons{
+    margin: 36px 26px;
+}
+
+.card-btn{
+    margin: 10px;
+    background-color: #EEEEEE;
+    color: black;
+}
