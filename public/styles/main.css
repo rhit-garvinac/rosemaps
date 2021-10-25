@@ -40,6 +40,7 @@ body {
 
 #search_button{
     padding:0 10px;
+    padding-top: 2px; /*I do not want to use the wonky 4 parameter padding*/
     margin-top: 60px;
     background-color: #800000;
     color: white;
@@ -58,6 +59,10 @@ body {
     color: white;
 }
 
+#title>a{
+    padding: 0 10px;
+}
+
 #menuMyAnnotations,
 #menuPublicAnnotations,
 #menuSignOut {
@@ -69,9 +74,12 @@ body {
     z-index: 1000; /*overkill*/
 }
 
-#map-img{
+#map-viewport{
     position: absolute;
+    touch-action: none;
+}
+
+#map-img{
     width: 3000px;
     height: auto;
-    touch-action: none;
 }

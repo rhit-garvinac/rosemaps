@@ -10,25 +10,103 @@
 var rhit = rhit || {};
 
 /** globals */
+rhit.FB_COLLECTION_ANNOTATIONS = "annotations";
+rhit.FB_KEY_ROOM = "room";
+rhit.FB_KEY_DESC = "desc";
+rhit.FB_KEY_AUTHOR = "author";
+//rhit.FB_KEY_LAST_TOUCHED ="lastTouched";
 rhit.mapPageController = null;
 
+rhit.scaleFactor = 22/30; //0.73333333333333...
+
+/** nodes */
+//nodes[0] = floor 1 nodes, nodes[1] = floor 2 nodes, etc.
+rhit.nodes = [
+	[
+		[916, 419, "O111"],
+		[1617, 419, "O113"],
+		[2121, 415, "O115"]
+	],
+	[
+		//O227 (1340, 550) entrance
+		//O227 (1205, 450) center
+		[1205, 450, "O227"],
+		[1534, 450, "O229"],
+		[1855, 445, "O231"],
+		[2197, 440, "O233"]
+	]
+	//TODO 😔
+];
+
+rhit.floor = 2;
+
+/** classes and stuff */
 rhit.MapPageController = class {
 	constructor() {
 		// Make the map image element draggable:
-		rhit.dragElement(document.getElementById("map-img"));
+		rhit.dragElement(document.getElementById("map-viewport"));
 		// TODO Make other elems draggable??
 		//
+		this._documentSnapshots = [];
+	  	this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_ANNOTATIONS);
+	  	this._unsubscribe = null;
+
 		document.querySelector("#fab").addEventListener("click",(event) => {
 			var map = document.getElementById("map-img")
 			var currSrc = map.src;
 			console.log(currSrc);
 			if(currSrc.indexOf("images/Olin2.png") != -1){
 				map.src = currSrc.replace("images/Olin2.png", "images/Olin1.png");
+				rhit.floor = 1;
 			} else if(currSrc.indexOf("images/Olin1.png") != -1){
 				map.src = currSrc.replace("images/Olin1.png", "images/Olin2.png");
+				rhit.floor = 2;
 			} else {
 				console.error("images " + currSrc + " not found");
 			}
+			this.displayNodes();
+		});
+
+		this.displayNodes();
+	}
+
+	displayNodes(){
+		//display nodes
+		const mapdiv = document.getElementById("map-viewport");
+		while (mapdiv.childNodes.length > 3) {
+			//children we don't remove: text node, img node, text node
+			mapdiv.removeChild(mapdiv.lastChild);
+		}
+		rhit.nodes[rhit.floor - 1].forEach(node => 
+		{//firebase room number query --> array of annotations for that room
+		let query = this._ref.where(rhit.FB_KEY_ROOM, "==", node[2]);
+		var annotations = [];
+		query.onSnapshot((querySnapshot) => {
+			querySnapshot.forEach((doc) => {
+				var annotation = new rhit.Annotation(
+					doc.id,
+					doc.get(rhit.FB_KEY_ROOM),
+					doc.get(rhit.FB_KEY_DESC)
+				);
+				annotations.push(annotation);
+			});
+
+			//IMPORTANT NOTE: Do NOT give any html elems a room id e.g. id="O227"
+			//These ids will be used programmatically by this function
+			let elem = null;
+
+			if(annotations.length == 0){
+				elem = htmlToElement(`<button id=${node[2]} class="btn" style="position:absolute; top:${node[1]}px; left:${node[0]}px">
+								<i class="material-icons">place</i>
+							</button>`);
+			} else {
+				elem = htmlToElement(`<button id=${node[2]} class="btn" style="position:absolute; top:${node[1]}px; left:${node[0]}px">
+								<i class="material-icons">comment</i>
+							</button>`);
+				elem.addEventListener("click", function(e){console.log(annotations);});
+			}
+			mapdiv.appendChild(elem);
+			});
 		});
 	}
 }
@@ -96,6 +174,29 @@ rhit.dragElement = function(elmnt) {
     document.onmousemove = null;
 	document.ontouchmove = null;
   }
+}
+
+function htmlToElement(html){
+	var template = document.createElement('template');
+	html = html.trim();
+	template.innerHTML = html;
+	return template.content.firstChild;
+}
+
+rhit.Node = class {
+	constructor(x, y, annotations){
+		this.x = x;
+		this.y = y; 
+		this.annotations = annotations;
+	}
+}
+
+rhit.Annotation = class {
+	constructor(id, room, desc){
+		this.id = id;
+		this.room = room;
+		this.desc = desc;
+	}
 }
 
 /* Main */
