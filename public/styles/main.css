@@ -1,0 +1,85 @@
+body {
+    background: #DDDDDD;
+}
+
+.navbar {
+    background-color: #800000;
+    color: white;
+}
+
+.page-container {
+    margin-top: 75px;
+}
+
+#fab{
+    position: fixed;
+    background: #800000;
+    color: white;
+    bottom: 30px;
+    right: 20px;
+    z-index: 1;
+    filter: drop-shadow(2px 2px 4px black);
+}
+
+#search-bar{
+    position: fixed;
+    top: 75px;
+    left: 20px;
+    width: 500px;
+    background-color: #800000;
+    z-index: 1;
+    filter: drop-shadow(2px 2px 4px black);
+}
+
+@media only screen and (max-width: 576px) {
+    #search-bar {
+      left: 0px;
+      width: 100vw;
+    }
+  }
+
+#search_button{
+    padding:0 10px;
+    padding-top: 2px; /*I do not want to use the wonky 4 parameter padding*/
+    margin-top: 60px;
+    background-color: #800000;
+    color: white;
+    font-weight: bold;
+}
+
+.bmd-layout-content {
+    height: 100vh;
+}
+
+.bmd-layout-drawer>header{
+    background-color: #800000;
+}
+
+.bmd-layout-drawer>header>a{
+    color: white;
+}
+
+#title>a{
+    padding: 0 10px;
+}
+
+#menuMyAnnotations,
+#menuPublicAnnotations,
+#menuSignOut {
+    font-size: 9pt;
+}
+
+#dw-s2{
+    background-color: #DDDDDD;
+    z-index: 1000; /*overkill*/
+}
+
+#map-viewport{
+    position: absolute;
+    touch-action: none;
+}
+
+#map-img{
+    width: 3000px;
+    height: auto;
+}
