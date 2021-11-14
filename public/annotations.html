@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <title>RoseMaps</title>
+</head>
+<body>
+
+  <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+    <header class="bmd-layout-header">
+      <nav class="navbar navbar-dark fixed-top bg-faded">
+        <ul class="nav navbar-nav">
+          <a class="navbar-brand" href="/">RoseMaps</a>
+        </ul>
+      </nav>
+    </header>
+  <main class="bmd-layout-content">
+    <nav class="navbar navbar-dark fixed-top">
+      <i class="material-icons" style="font-size:30px;">more_vert</i>
+      <a class="navbar-brand" href="#">RoseMaps</a>
+    </nav>
+    
+    <div id="listPage" class="container page-container">
+      <div id="annotationListContainer"></div>
+    </div>
+
+  </main>
+  </div>
+
+  <div class="modal fade" id="editAnnotationDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Annotation</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="inputEditTitle" class="bmd-label-floating">Title</label>
+            <input type="text" class="form-control" id="inputEditTitle">
+            <span class="bmd-help">What would you like to name this annotation?</span>
+          </div>
+          <div class="form-group">
+            <label for="inputEditDesc" class="bmd-label-floating">Description</label>
+            <input type="text" class="form-control" id="inputEditDesc">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+          <button type="button" id="submitEditAnnotation" class="btn btn-primary" data-dismiss="modal">CHANGE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteAnnotationDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Annotation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete this annotation?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button id="submitDeleteAnnotation" type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="navbar navbar-dark fixed-bottom">
+
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>$("body").bootstrapMaterialDesign();</script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="scripts/annotations.js"></script>
+</body>
+</html>

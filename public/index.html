@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
   <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/easyzoom2.css">
   <title>RoseMaps</title>
 </head>
 <body>
-
   <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
     <header class="bmd-layout-header">
             <nav class="navbar navbar-dark fixed-top bg-faded">
@@ -19,54 +19,145 @@
                 <i class="material-icons">more_vert</i>
              </button>
               <ul id="title" class="nav navbar-nav">
-                <a class="navbar-brand" href="#" >RoseMaps</a>
+                <a class="navbar-brand" href="#">RoseMaps</a>
               </ul>
             </nav>
       </header>
     <div id="dw-s2" class="bmd-layout-drawer bg-faded">
       <header>
-        <a class="navbar-brand" href="#" >RoseMaps</a>
+        <a class="navbar-brand" href="#">RoseMaps</a>
       </header>
       <ul class="list-group">
-        <a id="menuMyAnnotations" class="list-group-item"><i class="material-icons">person</i>My Annotations</a>
-        <a id="menuPublicAnnotations" class="list-group-item"><i class="material-icons">public</i>Public Annotations</a>
+        <a id="allAnnotations" class="list-group-item"><i class="material-icons">public</i>All Annotations</a>
+        <a id="myAnnotations" class="list-group-item"><i class="material-icons">person</i> My Annotations</a>
         <a id="menuSignOut" class="list-group-item"><i class="material-icons">logout</i>Sign Out</a>
       </ul>
     </div>
   <main class="bmd-layout-content">
-    <nav class="navbar navbar-dark fixed-top">
-      <i class="material-icons" style="font-size:30px;">more_vert</i>
-      <a class="navbar-brand" href="#">RoseMaps</a>
-    </nav>
-    <div id="map-viewport">
-      <img id="map-img" src="images/Olin2.png" alt="map">
+    <div class="easyzoom easyzoom--overlay easyzoom--with-toggle">
+      <div href="images/olin1.png">
+          <img class="toggle" id="MainMap" src="images/olin1.png" alt="map"/>
+      </div>
     </div>
   </main>
+
   </div>
 
-
-  
+  <div id="annotationList"> </div>
 
   <!-- Floaters -->
-  <button id="fab" type="button" class="btn bmd-btn-fab">
-    <i class="material-icons" style="font-size:40px;">elevator</i>
+  <button id="fab" type="button" class="btn bmd-btn-fab" data-toggle="modal" data-target="#addAnnotationDialog">
+    <i class="material-icons" style="font-size:40px;">add</i>
   </button>
 
-  <div class="container"  id="search-bar">
-    <div class="row">
-    <div class="col-10">
-      <form>
-        <div class="form-group col-12">
-          <input type="text" class="search-box col-12" id="formGroupExampleInput" placeholder="Starting Point">
-          <input type="text" class="search-box col-12" id="formGroupExampleInput2" placeholder="Destination">
+
+
+  <div class="container"  id="drop-down">
+    <form>
+      <label for="buildings">Select a building:</label>
+      <select name="buildings" id="buildings">
+        <optgroup label="Branam Innovation Center">
+          <option value="bic">BIC Ground Floor</option>
+        </optgroup>
+        <optgroup label="Cook Stadium">
+          <option value="cook">Cook Stadium Ground</option>
+        </optgroup>
+        <optgroup label="Crapo Hall">
+          <option value="crapo1">Crapo Hall First Floor</option>
+          <option value="crapo2">Crapo Hall Second Floor</option>
+          <option value="crapo3">Crapo Hall Third Floor</option>
+        </optgroup>
+        <optgroup label="Hadley Hall">
+          <option value="hadley1">Hadley Hall First Floor</option>
+          <option value="hadley2">Hadley Hall Second Floor</option>
+        </optgroup>
+        <optgroup label="Hatfield Hall">
+          <option value="hatfield1">Crapo Hall First Floor</option>
+          <option value="hatfield2">Crapo Hall Second Floor</option>
+          <option value="hatfield-1">Crapo Hall Lower Floor</option>
+        </optgroup>
+        <optgroup label="Kremer Innovation Center">
+          <option value="kremer">Kremer Ground Floor</option>
+        </optgroup>
+        <optgroup label="Logan Library">
+          <option value="logan1">Logan Library First Floor</option>
+          <option value="logan2">Logan Library Second Floor</option>
+          <option value="logan3">Logan Library Third Floor</option>
+        </optgroup>
+        <optgroup label="Moench Hall">
+          <option value="moench1">Moench Hall First Floor</option>
+          <option value="moench2">Moench Hall Second Floor</option>
+          <option value="moench3">Moench Hall Third Floor</option>
+          <option value="moench-1">Moench Hall Lower Floor One</option>
+          <option value="moench-2">Moench Hall Lower Floor Two</option>
+        </optgroup>
+        <optgroup label="Myers Hall">
+          <option value="myers1">Myer Hall First Floor</option>
+          <option value="myers2">Myer Hall Second Floor</option>
+        </optgroup>
+        <optgroup label="New Academic Building">
+          <option value="nab1">NAB First Floor</option>
+          <option value="nab2">NAB Library Second Floor</option>
+          <option value="nab3">NAB Library Third Floor</option>
+        </optgroup>
+        <optgroup label="Olin Hall">
+          <option value="olin1">Olin Hall First Floor</option>
+          <option value="olin2">Olin Hall Second Floor</option>
+        </optgroup>
+      </select>
+  <button id="buildingSubmit">Select</button>
+</form>
+  </div>
+
+  <div class="modal fade" id="viewAnnotation" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">View Annotation</h5>
         </div>
-      </form>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="annotationTitle" class="bmd-label-floating">Title</label>
+            <div id="annotationTitle"></div>
+          </div>
+          <div class="form-group">
+            <label for="annotationDesc" class="bmd-label-floating">Description</label>
+            <div id="annotationDesc"></div>
+          </div>
+          <div class="form-group">
+            <label for="annotationAuth" class="bmd-label-floating">Author</label>
+            <div id="annotationAuth"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+        </div>
+      </div>
     </div>
-    <div class="col-2">
-      <button type="button" class="btn btn-primary" id="search_button">
-        <i class="material-icons">search</i>
-      </button>
-    </div>
+  </div>
+
+  <div class="modal fade" id="addAnnotationDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Annotation</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="inputTitle" class="bmd-label-floating">Title</label>
+            <input type="text" class="form-control" id="inputTitle">
+            <span class="bmd-help">What would you like to name this annotation?</span>
+          </div>
+          <div class="form-group">
+            <label for="inputDesc" class="bmd-label-floating">Description</label>
+            <input type="text" class="form-control" id="inputDesc">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+          <button type="button" id="submitAddAnnotation" class="btn btn-primary" data-dismiss="modal">ADD</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -82,8 +173,8 @@
   <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
   <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
   <script src="/__/firebase/init.js"></script>
+  <script src="scripts/easyzoom.js"></script>
+  <script src="scripts/rosefire.min.js"></script>
   <script src="scripts/main.js"></script>
-  <script src="scripts/annotations.js"></script>
 </body>
-
 </html>
